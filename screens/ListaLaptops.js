@@ -25,7 +25,7 @@ export const ListaLaptops = ({ navigation }) => {
     <View>
       <Text style={styles.titleText}>LISTA DE LAPTOPS</Text>
       <Button
-        title="Consultar"
+        title="Consultar Lpatops"
         onPress={() => {
           getAllLaptops(fnRefreshList);
         }}
