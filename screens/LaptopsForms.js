@@ -1,13 +1,24 @@
 import { View, Text, StyleSheet, Alert } from "react-native";
 import { Input, Button } from "@rneui/base";
 import { useState } from "react";
-import { saveLaptopRest } from "../rest_client/laptopsConexion";
+import {
+  saveLaptopRest,
+  updateLaptopRest,
+} from "../rest_client/laptopsConexion";
 
-export const LaptopsForm = ({ navigation }) => {
-  const [marca, setMarca] = useState();
-  const [procesador, setProcesador] = useState();
-  const [memoria, setMemoria] = useState();
-  const [disco, setDisco] = useState();
+export const LaptopsForm = ({ navigation, route }) => {
+  let laptopRetrived = route.params.laptopParam;
+  let isNew = true;
+  if (laptopRetrived != null) {
+    isNew = false;
+  }
+
+  const [marca, setMarca] = useState(isNew ? null : laptopRetrived.marca);
+  const [procesador, setProcesador] = useState(
+    isNew ? null : laptopRetrived.procesador
+  );
+  const [memoria, setMemoria] = useState(isNew ? null : laptopRetrived.memoria);
+  const [disco, setDisco] = useState(isNew ? null : laptopRetrived.disco);
 
   const showMessage = () => {
     Alert.alert("CONFIRMACION", "Laptop creada exitosamente");

@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableHighlight,
+} from "react-native";
 import { Button, ListItem, FAB } from "@rneui/base";
 import { getAllLaptops } from "../rest_client/laptopsConexion";
 import { useState } from "react";
@@ -8,14 +14,22 @@ export const ListaLaptops = ({ navigation }) => {
 
   const LaptopsItem = ({ laptop }) => {
     return (
-      <ListItem>
-        <ListItem.Content>
-          <ListItem.Title>Marca: {laptop.marca}</ListItem.Title>
-          <ListItem.Subtitle>Procesador: {laptop.procesador}</ListItem.Subtitle>
-          <ListItem.Subtitle>Memoria: {laptop.memoria}</ListItem.Subtitle>
-          <ListItem.Subtitle>Disco: {laptop.disco}</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate("LaptosFormNav", { laptopParam: laptop });
+        }}
+      >
+        <ListItem>
+          <ListItem.Content>
+            <ListItem.Title>Marca: {laptop.marca}</ListItem.Title>
+            <ListItem.Subtitle>
+              Procesador: {laptop.procesador}
+            </ListItem.Subtitle>
+            <ListItem.Subtitle>Memoria: {laptop.memoria}</ListItem.Subtitle>
+            <ListItem.Subtitle>Disco: {laptop.disco}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+      </TouchableHighlight>
     );
   };
   fnRefreshList = (laptops) => {
@@ -36,7 +50,7 @@ export const ListaLaptops = ({ navigation }) => {
           return <LaptopsItem laptop={item} />;
         }}
       />
-      <FAB title="+" onPress={() => navigation.navigate("LaptosFormNav")} />
+      <FAB title="+" onPress={() => navigation.navigate("LaptosFormNav", {})} />
     </View>
   );
 };
