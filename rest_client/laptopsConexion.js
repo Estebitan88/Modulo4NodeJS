@@ -28,29 +28,19 @@ export const saveLaptopRest = (lap, fnShowMessage) => {
   fetch(URL + "laptops", config)
     .then((response) => response.json())
     .then((body) => {
-      fnShowMessage();
+      fnShowMessage("Se ha creado la laptop");
       console.log(body);
     });
 };
 
-export const updateLaptopRest = (lap, fnShowMessage) => {
+export const deleteLaptopRest = (laptop, fnShowMessage) => {
   const config = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      id: lap.id,
-      marca: lap.marca,
-      procesador: lap.procesador,
-      memoria: lap.memoria,
-      disco: lap.disco,
-    }),
+    method: "DELETE",
   };
-  fetch(URL + "laptops/" + lap.id, config)
+  fetch(URL + "laptops/" + laptop.id, config)
     .then((response) => response.json())
     .then((body) => {
-      fnShowMessage();
+      fnShowMessage("Se ha eliminado la laptop");
       console.log(body);
     });
 };
